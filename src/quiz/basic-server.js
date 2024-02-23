@@ -1,5 +1,6 @@
 #! /opt/homebrew/bin/node
 const http = require('http');
+const path = require('path');
 const url = require('url');
 
 const hostname = 'localhost';
@@ -32,12 +33,12 @@ const server = http.createServer((req, res) => {
     // Parse the request URL to extract parameters
     const parsedUrl = url.parse(req.url, true);
     const { pathname } = parsedUrl;
-
+    console.log("Pathname", pathname);
     // Check if the request is for the specified endpoint
     if (pathname.startsWith('/incidents/')) {
         // Extract parameters from the URL
         const [, , road, location, direction, id] = pathname.split('/');
-
+        console.log("split", pathname.split('/'));
         // Check if all parameters are provided
         if (road && location && direction && id) {
             // Send response with the extracted parameters
@@ -45,6 +46,9 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(incidents.filter((incident) => {
                 return incident.id === `MABOS00${id}`
             })));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('URL parameters are incorrect');
         }
     } else {
         // If the request is for an unsupported endpoint, send a not found response
