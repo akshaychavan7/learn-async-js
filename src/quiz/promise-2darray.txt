@@ -1,1 +1,5 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+The script execution giving unexpected output because sum2DArray() function is returning a promise which we did not handle correctly.
+Thus, to handle it, we can add a .then() block along with a .catch() block to handle any unexpected errors. 
+We can simply print the result inside the .then() block.
