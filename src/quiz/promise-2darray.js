@@ -32,6 +32,7 @@ sum2DArray(array2D)
 .then((response)=> console.log(response))
 .catch((err)=> console.log(`Error: ${err}`));
 
+
 sum2DArray('array2D')
 .then((response)=> console.log(response))
 .catch((err)=> console.log(`Error: ${err}`));
